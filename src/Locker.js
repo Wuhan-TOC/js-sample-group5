@@ -8,6 +8,6 @@ export default class Locker {
   }
 
   getPackage(barcode) {
-    return barcode !== null && barcode !== '' && barcode !== undefined
+    return barcode !== null && barcode !== ''
   }
 }

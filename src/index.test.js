@@ -12,7 +12,7 @@ describe('locker test', () => {
   it('should print error message when store package given an locker without empty box', () => {
     const locker = new Locker()
 
-    const result = locker.storePackageWithoutAvailableBox()
+    const result = locker.this.storePackageWithoutAvailableBox()
 
     expect(result).toEqual('error')
   })
@@ -20,7 +20,7 @@ describe('locker test', () => {
   it('should get true when get package given a barcode', () => {
     const locker = new Locker()
 
-    const result = locker.getPackage('223432')
+    const result = locker.this.getPackage('223432')
 
     expect(result).toEqual(true)
   })
@@ -28,7 +28,7 @@ describe('locker test', () => {
   it('should get false when get package given a barcode', () => {
     const locker = new Locker()
 
-    const result = locker.getPackage(null)
+    const result = locker.this.getPackage(null)
 
     expect(result).toEqual(false)
   })
