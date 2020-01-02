@@ -2,34 +2,33 @@ import Locker from './Locker'
 
 describe('locker test', () => {
   it('should generate a barcode when store package given available locker', () => {
+    const locker = new Locker()
 
-    let locker = new Locker();
-
-    let result = locker.storePackageWithAvailableBox()
+    const result = locker.this.storePackageWithAvailableBox()
 
     expect(result).not.toBeNull()
   })
 
-  it("should print error message when store package given an locker without empty box", () => {
-    let locker = new Locker();
+  it('should print error message when store package given an locker without empty box', () => {
+    const locker = new Locker()
 
-    let result = locker.storePackageWithoutAvailableBox()
+    const result = locker.storePackageWithoutAvailableBox()
 
-    expect(result).toEqual("error")
+    expect(result).toEqual('error')
   })
 
-  it("should get true when get package given a barcode", () => {
-    let locker = new Locker();
+  it('should get true when get package given a barcode', () => {
+    const locker = new Locker()
 
-    let result = locker.getPackage("223432")
+    const result = locker.getPackage('223432')
 
     expect(result).toEqual(true)
   })
 
-  it("should get false when get package given a barcode", () => {
-    let locker = new Locker();
+  it('should get false when get package given a barcode', () => {
+    const locker = new Locker()
 
-    let result = locker.getPackage(null)
+    const result = locker.getPackage(null)
 
     expect(result).toEqual(false)
   })
