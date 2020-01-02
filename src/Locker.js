@@ -1,13 +1,7 @@
 export default class Locker {
-  storePackageWithAvailableBox() {
-    return ''
-  }
+  storePackageWithAvailableBox = () => ''
 
-  storePackageWithoutAvailableBox() {
-    return 'error'
-  }
+  storePackageWithoutAvailableBox = () => 'error'
 
-  getPackage(barcode) {
-    return barcode !== null && barcode !== ''
-  }
+  getPackage = (barcode) => barcode !== null && barcode !== ''
 }
