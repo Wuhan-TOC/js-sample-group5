@@ -11,22 +11,10 @@ import {
 export default class Locker {
   constructor(boxCount) {
     this.totalCount = boxCount
-    this.boxArr = new Array()
-    this.addBoxes(boxCount)
-  }
-
-  addBoxes = (boxCount) => {
-    if (boxCount === 0) {
-      return
-    }
-    for (let i = 0; i < boxCount; i++) {
-      const box = {
-        id: i,
-        status: StatusEnum.available,
-        tempCode: '',
-      }
-      this.boxArr.push(box)
-    }
+    this.boxArr = new Array(boxCount).fill({
+      status: StatusEnum.available,
+      tempCode: '',
+    })
   }
 
   storePackage = () => {
@@ -48,7 +36,7 @@ export default class Locker {
     if (barcode === '' || barcode === null) {
       return GET_PACKAGE_ERROR
     }
-    let index = findIndex(this.boxArr, box => box.tempCode === barcode)
+    const index = findIndex(this.boxArr, (box) => box.tempCode === barcode)
 
     if (index >= 0) {
       const newBox = this.boxArr[index]
