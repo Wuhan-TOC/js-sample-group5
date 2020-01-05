@@ -1,6 +1,5 @@
 import findIndex from 'lodash/findIndex'
 import {
-  StatusEnum,
   STORE_PACKAGE_ERROR,
   GET_PACKAGE_ERROR,
   getRandomInt,
@@ -9,25 +8,25 @@ import {
 } from '.'
 
 export default class Locker {
-  constructor(boxCount) {
-    this.totalCount = boxCount
-    this.boxArr = new Array(boxCount).fill({
-      status: StatusEnum.available,
-      tempCode: '',
+  constructor(totalAvailableBoxes) {
+    this.totalAvailableBoxes = totalAvailableBoxes
+    this.boxArr = new Array(totalAvailableBoxes).fill({
+      isAvailable: true,
+      barcode: '',
     })
   }
 
   storePackage = () => {
-    if (this.totalCount === 0) {
+    if (this.totalAvailableBoxes === 0) {
       return STORE_PACKAGE_ERROR
     }
-    const randomId = getRandomInt(this.totalCount)
+    const randomId = getRandomInt(this.totalAvailableBoxes)
     const box = this.boxArr[randomId]
-    if (box.status === StatusEnum.available) {
-      box.status = StatusEnum.unavailable
-      box.tempCode = getRandomString(box.id)
+    if (box.isAvailable === true) {
+      box.isAvailable = false
+      box.barcode = getRandomString(box.id)
       this.boxArr.splice(randomId, 1, box)
-      return box.tempCode
+      return box.barcode
     }
     return STORE_PACKAGE_ERROR
   }
@@ -36,12 +35,12 @@ export default class Locker {
     if (barcode === '' || barcode === null) {
       return GET_PACKAGE_ERROR
     }
-    const index = findIndex(this.boxArr, (box) => box.tempCode === barcode)
+    const index = findIndex(this.boxArr, (box) => box.barcode === barcode)
 
     if (index >= 0) {
       const newBox = this.boxArr[index]
-      newBox.tempCode = ''
-      newBox.status = StatusEnum.available
+      newBox.barcode = ''
+      newBox.isAvailable = true
       this.boxArr.splice(index, 1, newBox)
       return GET_PACKAGE_SUCCESS
     }

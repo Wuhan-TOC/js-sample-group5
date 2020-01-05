@@ -1,8 +1,3 @@
-export const StatusEnum = {
-  available: 1,
-  unavailable: 0,
-}
-
 // / 随机获取box的id
 export const getRandomInt = (m) => parseInt(Math.random() * m, 10)
 
