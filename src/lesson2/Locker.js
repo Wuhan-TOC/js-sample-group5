@@ -1,3 +1,4 @@
+import findIndex from 'lodash/findIndex'
 import {
   StatusEnum,
   STORE_PACKAGE_ERROR,
@@ -44,17 +45,11 @@ export default class Locker {
   }
 
   getPackage = (barcode) => {
-    if (barcode === '' || barcode == null) {
+    if (barcode === '' || barcode === null) {
       return GET_PACKAGE_ERROR
     }
-    let index = -1
-    for (let i = 0; i < this.boxArr.length; i++) {
-      const box = this.boxArr[i]
-      if (box.tempCode === barcode) {
-        index = i
-        break
-      }
-    }
+    let index = findIndex(this.boxArr, box => box.tempCode === barcode)
+
     if (index >= 0) {
       const newBox = this.boxArr[index]
       newBox.tempCode = ''
