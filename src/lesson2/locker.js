@@ -1,13 +1,11 @@
-import Box from './Box'
+import Box from './box'
 import findIndex from 'lodash/findIndex'
 import {
   STORE_PACKAGE_ERROR,
   GET_PACKAGE_ERROR,
   GET_PACKAGE_SUCCESS,
   TOTAL_BOXES,
-  getRandomInt,
-  getRandomString,
-} from '.'
+} from './constants'
 
 export default class Locker {
   constructor(totalAvailableBox) {
@@ -18,12 +16,14 @@ export default class Locker {
   }
 
   InitBoxes = (totalAvailableBox) => {
-    if (totalAvailableBox === 0) {
+    if (totalAvailableBox === 0 || totalAvailableBox > TOTAL_BOXES) {
       return
     }
 
+    /* eslint no-plusplus:0*/
     for (let i = 0; i < totalAvailableBox; i++) {
       const box = new Box(i + 1, true, '')
+      /* eslint no-invalid-this:0*/
       this.availableBoxes.push(box)
     }
 
@@ -37,15 +37,15 @@ export default class Locker {
     if (this.totalAvailableBox === 0) {
       return STORE_PACKAGE_ERROR
     }
-
-    const randomId = getRandomInt(this.totalAvailableBox)
+    const randomId = parseInt(Math.random() * this.totalAvailableBox, 10)
+    /* eslint prefer-destructuring:0*/
     const availableBox = this.availableBoxes[randomId]
     if (availableBox.isAvailable === true) {
       this.totalAvailableBox--
-      const barcode = getRandomString(availableBox.boxNumber)
-      const newLockedbox = new Box(availableBox.boxNumber, false, barcode)
+      const barcode = Date.parse(new Date())
+      const newLockedBox = new Box(availableBox.boxNumber, false, barcode)
       this.availableBoxes.splice(randomId, 1)
-      this.unavailableBoxes.push(newLockedbox)
+      this.unavailableBoxes.push(newLockedBox)
       return barcode
     }
     return STORE_PACKAGE_ERROR

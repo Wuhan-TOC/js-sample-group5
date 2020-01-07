@@ -1,5 +1,9 @@
-import Locker from './Locker'
-import { STORE_PACKAGE_ERROR, GET_PACKAGE_SUCCESS, GET_PACKAGE_ERROR } from '.'
+import Locker from './locker'
+import {
+  STORE_PACKAGE_ERROR,
+  GET_PACKAGE_ERROR,
+  GET_PACKAGE_SUCCESS,
+} from './constants'
 
 describe('Locker test', () => {
   it('should generate a barcode when store package given an available locker', () => {
