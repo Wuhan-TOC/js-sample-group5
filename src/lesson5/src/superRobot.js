@@ -1,6 +1,6 @@
 import GraduateRobot from './graduateRobot'
 
-export default class SuperRobot extends GraduateRobot{
+export default class SuperRobot extends GraduateRobot {
   constructor(lockers) {
     super(lockers)
   }

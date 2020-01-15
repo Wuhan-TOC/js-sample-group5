@@ -14,9 +14,9 @@ export default class GraduateRobot {
   }
 
   withdraw = (ticket) => {
-    const correctLocker = this.lockers.find((locker) => {
-      return locker.lockerNumber === ticket.lockerNumber
-    })
+    const correctLocker = this.lockers.find(
+      (locker) => locker.lockerNumber === ticket.lockerNumber
+    )
     return correctLocker.getPackage(ticket)
   }
 }
